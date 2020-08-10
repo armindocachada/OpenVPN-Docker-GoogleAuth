@@ -1,0 +1,71 @@
+version: '3.7'
+
+volumes:
+  openvpn_config:
+#networks:
+#   frontend:
+#    external: true
+#   backend:
+#    external: true
+
+services:
+  openvpn:
+    container_name: openvpn
+    build:
+      context:  .
+      dockerfile: Dockerfile_openvpn
+    cap_add:
+        - NET_ADMIN
+    ports:
+        - 1194:1194/udp
+    environment:
+      - HOST_ADDR=86.16.64.132
+      - OPENVPN_ADMIN_USER
+      - OPENVPN_ADMIN_PASSWORD
+      - EASYRSA_KEY_SIZE
+      - EASYRSA_CA_EXPIRE
+      - EASYRSA_CERT_EXPIRE
+      - EASYRSA_REQ_COUNTRY
+      - EASYRSA_REQ_PROVINCE
+      - EASYRSA_REQ_CITY
+      - EASYRSA_REQ_ORG
+      - EASYRSA_REQ_OU
+      - EASYRSA_REQ_EMAIL
+      - EASYRSA_REQ_CN
+      - EASYRSA_BATCH
+    volumes:
+       - openvpn_config:/etc/openvpn
+    restart: always
+    command: tail -f /dev/null
+
+  db:
+    image: mariadb
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${OPENVPN_ADMIN_DATABASE}
+      MYSQL_USER: ${OPENVPN_ADMIN_USER}
+      MYSQL_PASSWORD: ${OPENVPN_ADMIN_PASSWORD}
+  googleauth:
+    container_name: googleauth
+    build:
+        context:  .
+        dockerfile: Dockerfile_googleauth
+
+  webadmin:
+    container_name: webadmin
+    depends_on:
+      - db
+      - openvpn
+    build:
+        context:  .
+        dockerfile: Dockerfile_webadmin
+    ports:
+      - 8080:80
+    volumes:
+      - openvpn_config:/etc/openvpn
+    environment:
+      - OPENVPN_ADMIN_USER
+      - OPENVPN_ADMIN_PASSWORD
+    command: [start.sh]

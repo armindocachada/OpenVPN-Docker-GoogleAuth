@@ -1,0 +1,27 @@
+FROM php:7.4-apache
+RUN apt-get update && apt-get install -y git unzip zip git nodejs wget libzip-dev
+RUN docker-php-ext-install pdo pdo_mysql mysqli zip
+
+WORKDIR /root
+RUN git clone https://github.com/armindocachada/OpenVPN-Admin
+
+RUN ["/bin/bash", "-c", "cp -r /root/OpenVPN-Admin/{index.php,sql,bower.json,.bowerrc,js,include,css,installation/client-conf} /var/www/html/"]
+RUN ls -alh /var/www/html/
+RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
+&& curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
+# Make sure we're installing what we think we're installing!
+&& php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" \
+&& php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
+&& rm -f /tmp/composer-setup.*
+
+# Configure MySQL in openvpn scripts
+RUN sed -i "s/\$host\ =\ 'localhost'/\$host = 'db'/" "/var/www/html/include/config.php" && \
+    sed -i "s/\$pass\ =\ ''/\$pass = getenv('OPENVPN_ADMIN_PASSWORD')/" "/var/www/html/include/config.php" && \
+    sed -i "s/\$user\ =\ ''/\$user = getenv('OPENVPN_ADMIN_USER')/" "/var/www/html/include/config.php"
+RUN curl -L https://npmjs.org/install.sh | sh
+
+WORKDIR /var/www/html
+RUN npm install -g bower
+RUN bower --allow-root install
+RUN rm -fr /root/OpenVPN-Admin && chown -R www-data:www-data /var/www/html
+COPY ./webadmin/start.sh /usr/local/bin
