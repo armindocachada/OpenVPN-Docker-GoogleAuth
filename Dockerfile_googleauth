@@ -1,7 +1,5 @@
 FROM php:7.4-apache
 
-VOLUME /etc/openvpn
-
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
 # Make sure we're installing what we think we're installing!
