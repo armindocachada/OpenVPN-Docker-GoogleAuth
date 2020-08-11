@@ -17,7 +17,8 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 # Configure MySQL in openvpn scripts
 RUN sed -i "s/\$host\ =\ 'localhost'/\$host = 'db'/" "/var/www/html/include/config.php" && \
     sed -i "s/\$pass\ =\ ''/\$pass = getenv('OPENVPN_ADMIN_PASSWORD')/" "/var/www/html/include/config.php" && \
-    sed -i "s/\$user\ =\ ''/\$user = getenv('OPENVPN_ADMIN_USER')/" "/var/www/html/include/config.php"
+    sed -i "s/\$user\ =\ ''/\$user = getenv('OPENVPN_ADMIN_USER')/" "/var/www/html/include/config.php" && \
+    sed -i "s/\$user\ =\ ''/\$app_name = getenv('OPENVPN_APP_NAME')/" "/var/www/html/include/config.php"
 RUN curl -L https://npmjs.org/install.sh | sh
 
 WORKDIR /var/www/html
