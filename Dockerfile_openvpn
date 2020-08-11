@@ -6,6 +6,8 @@ LABEL maintainer="Armindo Cachada <armindo.cachada@spltech.co.uk>"
 
 RUN yum install -y epel-release
 RUN yum install -y openvpn sed git openssl mysql
+RUN ln -s /opt/rh/rh-php72/root/usr/bin/php /usr/bin/
+
 WORKDIR /root
 RUN git clone https://github.com/armindocachada/OpenVPN-Admin
 WORKDIR /root/OpenVPN-Admin
