@@ -15,6 +15,9 @@ if [ ! -f "/etc/openvpn/easy-rsa/pki/ca.crt" ]; then
   openvpn --genkey --secret pki/ta.key
   cp /etc/openvpn/easy-rsa/pki/{ca.crt,ta.key,issued/server.crt,private/server.key,dh.pem} "/etc/openvpn/"
 
+  if [[ -z $server_port ]]; then
+    server_port="443"
+  fi
 
 fi
 

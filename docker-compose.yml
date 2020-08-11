@@ -12,14 +12,15 @@ services:
   openvpn:
     container_name: openvpn
     build:
-      context:  .
+      context: .
       dockerfile: Dockerfile_openvpn
     cap_add:
         - NET_ADMIN
     ports:
         - 1194:1194/udp
     environment:
-      - HOST_ADDR=86.16.64.132
+      - HOST_ADDR
+      - HOST_SSL_PORT
       - OPENVPN_ADMIN_USER
       - OPENVPN_ADMIN_PASSWORD
       - EASYRSA_KEY_SIZE
@@ -68,4 +69,6 @@ services:
     environment:
       - OPENVPN_ADMIN_USER
       - OPENVPN_ADMIN_PASSWORD
+      - HOST_ADDR
+      - HOST_SSL_PORT
     command: [start.sh]

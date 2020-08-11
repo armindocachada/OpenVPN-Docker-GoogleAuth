@@ -10,4 +10,4 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 && rm -f /tmp/composer-setup.*
 RUN apt-get update && apt-get install -y git unzip zip
 RUN composer require  phpgangsta/googleauthenticator:dev-master
-COPY webadmin/* /var/www/html/
+COPY googleauth/* /var/www/html/
