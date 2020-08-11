@@ -15,6 +15,8 @@ RUN sed -i "s/USER=''/USER='\$OPENVPN_ADMIN_USER'/" "/etc/openvpn/scripts/config
     sed -i "s/PASS=''/PASS='\$OPENVPN_ADMIN_PASSWORD'/" "/etc/openvpn/scripts/config.sh" && \
     sed -i "s/HOST='localhost'/HOST='db'/" "/etc/openvpn/scripts/config.sh"
 
+# change group nogroup to group nobody
+RUN sed -i "s/group nogroup/group nobody/" "/etc/openvpn/server.conf"
 
 # Get the rsa keys
 WORKDIR /root/

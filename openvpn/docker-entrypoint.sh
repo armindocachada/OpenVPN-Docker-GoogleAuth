@@ -20,7 +20,10 @@ if [ ! -f "/etc/openvpn/easy-rsa/pki/ca.crt" ]; then
   fi
 
 fi
-
+mkdir /dev/net
+if [ ! -f /dev/net/tun ]; then
+    mknod /dev/net/tun c 10 200
+fi
 
 primary_nic=`ip route | grep default | cut -d ' ' -f 5`
 
@@ -36,4 +39,5 @@ iptables -t nat -A POSTROUTING -s 10.8.0.2/24 -o $primary_nic -j MASQUERADE
 
 
 
-tail -f /dev/null
+# Need to feed key password
+/usr/sbin/openvpn --cd /etc/openvpn/ --config /etc/openvpn/server.conf

@@ -18,6 +18,7 @@ services:
         - NET_ADMIN
     ports:
         - 1194:1194/udp
+        - 493:493/tcp
     environment:
       - HOST_ADDR
       - HOST_SSL_PORT
