@@ -41,3 +41,5 @@ iptables -t nat -A POSTROUTING -s 10.8.0.2/24 -o $primary_nic -j MASQUERADE
 
 # Need to feed key password
 /usr/sbin/openvpn --cd /etc/openvpn/ --config /etc/openvpn/server.conf
+
+tail -f /dev/null
