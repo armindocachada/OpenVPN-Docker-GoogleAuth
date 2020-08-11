@@ -2,6 +2,7 @@ version: '3.7'
 
 volumes:
   openvpn_config:
+  db_data:
 #networks:
 #   frontend:
 #    external: true
@@ -18,7 +19,7 @@ services:
         - NET_ADMIN
     ports:
         - 1194:1194/udp
-        - 493:493/tcp
+        - 443:443/tcp
     environment:
       - HOST_ADDR
       - HOST_SSL_PORT
@@ -49,6 +50,8 @@ services:
       MYSQL_DATABASE: ${OPENVPN_ADMIN_DATABASE}
       MYSQL_USER: ${OPENVPN_ADMIN_USER}
       MYSQL_PASSWORD: ${OPENVPN_ADMIN_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
   googleauth:
     container_name: googleauth
     build:
