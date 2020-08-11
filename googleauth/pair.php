@@ -18,5 +18,5 @@ if (!$valid) {
 $ga = new PHPGangsta_GoogleAuthenticator();
 
 
-$qrCodeUrl = $ga->getQRCodeGoogleUrl('${appName} (${appInfo})', $secretCode);
+$qrCodeUrl = $ga->getQRCodeGoogleUrl("${appName} (${appInfo})", "$secretCode");
 echo '<img src='.$qrCodeUrl.' border=0/>';
