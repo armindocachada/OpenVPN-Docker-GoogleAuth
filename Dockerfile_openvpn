@@ -1,9 +1,11 @@
-FROM centos:7
+FROM centos/php-72-centos7
+
+USER root
 
 LABEL maintainer="Armindo Cachada <armindo.cachada@spltech.co.uk>"
 
 RUN yum install -y epel-release
-RUN yum install -y openvpn php sed git openssl mysql
+RUN yum install -y openvpn sed git openssl mysql
 WORKDIR /root
 RUN git clone https://github.com/armindocachada/OpenVPN-Admin
 WORKDIR /root/OpenVPN-Admin
