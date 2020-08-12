@@ -24,6 +24,7 @@ services:
       - HOST_SSL_PORT
       - OPENVPN_ADMIN_USER
       - OPENVPN_ADMIN_PASSWORD
+      - OPENVPN_APP_NAME
       - EASYRSA_KEY_SIZE
       - EASYRSA_CA_EXPIRE
       - EASYRSA_CERT_EXPIRE
@@ -72,6 +73,8 @@ services:
     environment:
       - OPENVPN_ADMIN_USER
       - OPENVPN_ADMIN_PASSWORD
+      - OPENVPN_APP_NAME
       - HOST_ADDR
       - HOST_SSL_PORT
+
     command: [start.sh]
