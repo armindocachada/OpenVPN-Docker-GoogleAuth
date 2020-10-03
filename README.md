@@ -1,25 +1,7 @@
 
 ## Creating a VPN with 2 Factor Authentication using OpenVPN and Docker
 
-![Photo by [Petter Lagson](https://unsplash.com/@lagopett?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/vpn?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)](https://cdn-images-1.medium.com/max/12000/1*PuZGAwBtWC6g67_LIsndJQ.jpeg)
-
-I recently set up a VPN with 2-Factor Authentication using the Community Edition of OpenVPN and using Google’s standard authenticator. I am writing this article to save you time and effort because this was not straightforward.
-
-Most guides I found on the internet, if not all, talk about using a PAM plugin to extend OpenVPN with 2 Step Authentication. Not only is this plugin difficult to install because of Linux library dependencies, but most importantly it requires a real Unix user for each VPN account you need to setup. For me, that was a non-starter as all my existing VPN users reside only inside a database.
-
-### Background
-
-Before the need for extra security via 2-factor authentication came up, I was already using OpenVPN with the help of an excellent open-source project in GitHub which provides a web administration interface ([https://github.com/Chocobozzz/OpenVPN-Admin](https://github.com/Chocobozzz/OpenVPN-Admin)). Since I only use the community edition of OpenVPN, this project gives you access to a neat management interface, from which you can create & manage VPN user accounts, and also allow VPN users to download, the files that they need to connect to the VPN. The management interface is a simple PHP web interface that uses a **MariaDB** as a backend.
-
-### What is OpenVPN?
-
-According to Wikipedia: **“OpenVPN** is an open-source commercial software that implements virtual private network techniques to create secure point-to-point or site-to-site connections in routed or bridged configurations and remote access facilities. It uses a custom security protocol that utilizes SSL/TLS for key exchange”.
-
-## Why we need it
-
-With more people working from home due to lockdowns, this has required ways for workers to be able to access intranet websites from within their homes without compromising security and without relying on IP address whitelisting as Home IP addresses are not normally static.
-
-To make the VPN more secure I added 2-Factor authentication using Google’s Authenticator reference application.
+Medium article: https://medium.com/@armindo_93441/creating-a-vpn-with-2-factor-authentication-using-openvpn-and-docker-9569e609151a
 
 ## How it works
 
