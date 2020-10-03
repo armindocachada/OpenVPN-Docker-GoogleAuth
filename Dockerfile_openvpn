@@ -1,0 +1,32 @@
+FROM centos/php-72-centos7
+
+USER root
+
+LABEL maintainer="Armindo Cachada <armindo.cachada@spltech.co.uk>"
+
+RUN yum install -y epel-release
+RUN yum install -y openvpn sed git openssl mysql
+RUN ln -s /opt/rh/rh-php72/root/usr/bin/php /usr/bin/
+
+WORKDIR /root
+RUN git clone https://github.com/armindocachada/OpenVPN-Admin
+WORKDIR /root/OpenVPN-Admin
+RUN cp -r "./installation/scripts" "/etc/openvpn/" && chmod +x "/etc/openvpn/scripts/"* && \
+    cp "./installation/server.conf" "/etc/openvpn/" && mkdir "/etc/openvpn/ccd"
+
+
+# change group nogroup to group nobody
+RUN sed -i "s/group nogroup/group nobody/" "/etc/openvpn/server.conf" && \
+    sed -i "s/explicit-exit-notify 1/explicit-exit-notify 0/" "/etc/openvpn/server.conf"
+
+# Get the rsa keys
+WORKDIR /root/
+RUN curl -L "https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz" -O && \
+    tar -xaf "EasyRSA-unix-v3.0.6.tgz" && mv "EasyRSA-v3.0.6" /etc/openvpn/easy-rsa &&rm "EasyRSA-unix-v3.0.6.tgz"
+
+COPY ./openvpn/docker-entrypoint.sh /usr/local/bin
+
+# Make ip forwading and make it persistent
+RUN echo "net.ipv4.ip_forward = 1" >> "/etc/sysctl.conf"
+
+ENTRYPOINT ["docker-entrypoint.sh"]
