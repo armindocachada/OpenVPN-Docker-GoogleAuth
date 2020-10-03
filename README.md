@@ -237,13 +237,9 @@ And a new world opens up!
 Hope you enjoy it.
 
 ## Resources:
-[**Code Mental**
-*In my channel, I try to give you access all the information I know on how to become a software developer with tips &…*www.youtube.com](https://www.youtube.com/channel/UCK1NFGy1pSjOVHW7_4qfffA)
+[**Code Mental Youtube Channel**](https://www.youtube.com/channel/UCK1NFGy1pSjOVHW7_4qfffA)
 [**armindocachada/OpenVPN-Docker-GoogleAuth**
 github.com](https://github.com/armindocachada/OpenVPN-Docker-GoogleAuth)
-[**armindocachada/OpenVPN-Admin**
-*Administrate its OpenVPN with a web interface (logs visualisations, users managing...) and a SQL database. It also…*github.com](https://github.com/armindocachada/OpenVPN-Admin)
-[**Chocobozzz/OpenVPN-Admin**
-*Administrate its OpenVPN with a web interface (logs visualisations, users managing...) and a SQL database. GNU/Linux…*github.com](https://github.com/Chocobozzz/OpenVPN-Admin)
-[**PHPGangsta/GoogleAuthenticator**
-*This PHP class can be used to interact with the Google Authenticator mobile app for 2-factor-authentication. This class…*github.com](https://github.com/PHPGangsta/GoogleAuthenticator)
+[**armindocachada/OpenVPN-Admin**](https://github.com/armindocachada/OpenVPN-Admin)
+[**Chocobozzz/OpenVPN-Admin**](https://github.com/Chocobozzz/OpenVPN-Admin)
+[**PHPGangsta/GoogleAuthenticator**](https://github.com/PHPGangsta/GoogleAuthenticator)
