@@ -238,8 +238,11 @@ Hope you enjoy it.
 
 ## Resources:
 [**Code Mental Youtube Channel**](https://www.youtube.com/channel/UCK1NFGy1pSjOVHW7_4qfffA)
-[**armindocachada/OpenVPN-Docker-GoogleAuth**
-github.com](https://github.com/armindocachada/OpenVPN-Docker-GoogleAuth)
+
+[**armindocachada/OpenVPN-Docker-GoogleAuth**](https://github.com/armindocachada/OpenVPN-Docker-GoogleAuth)
+
 [**armindocachada/OpenVPN-Admin**](https://github.com/armindocachada/OpenVPN-Admin)
+
 [**Chocobozzz/OpenVPN-Admin**](https://github.com/Chocobozzz/OpenVPN-Admin)
+
 [**PHPGangsta/GoogleAuthenticator**](https://github.com/PHPGangsta/GoogleAuthenticator)
