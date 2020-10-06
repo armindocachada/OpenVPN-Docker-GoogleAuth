@@ -3,6 +3,8 @@
 
 Medium article: https://medium.com/@armindo_93441/creating-a-vpn-with-2-factor-authentication-using-openvpn-and-docker-9569e609151a
 
+[My Youtube Channel](https://www.youtube.com/channel/UCK1NFGy1pSjOVHW7_4qfffA)
+
 ## How it works
 
 This OpenVPN solution uses three separate open-source projects:
