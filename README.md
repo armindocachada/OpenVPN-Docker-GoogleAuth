@@ -1,7 +1,7 @@
 
 ## Creating a VPN with 2 Factor Authentication using OpenVPN and Docker
 
-Medium article: https://medium.com/@armindo_93441/creating-a-vpn-with-2-factor-authentication-using-openvpn-and-docker-9569e609151a
+Blog Article: https://spltech.co.uk/creating-a-vpn-with-2-factor-authentication-using-openvpn-and-docker/
 
 [My Youtube Channel](https://www.youtube.com/channel/UCK1NFGy1pSjOVHW7_4qfffA)
 
