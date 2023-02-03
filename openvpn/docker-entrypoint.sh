@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 if [ ! -f "/etc/openvpn/easy-rsa/pki/ca.crt" ]; then
   cd /etc/openvpn/easy-rsa
   # Init PKI dirs and build CA certs
@@ -10,6 +8,7 @@ if [ ! -f "/etc/openvpn/easy-rsa/pki/ca.crt" ]; then
   ./easyrsa gen-dh
   # Genrate server keypair
   ./easyrsa build-server-full server nopass
+ 
 
   # Generate shared-secret for TLS Authentication
   openvpn --genkey --secret pki/ta.key
@@ -49,4 +48,4 @@ sed -i "s/port 443/port $HOST_SSL_PORT/" /etc/openvpn/server.conf;
 # Need to feed key password
 /usr/sbin/openvpn --cd /etc/openvpn/ --config /etc/openvpn/server.conf
 
-tail -f /dev/null
+tail -f /var/log/openvpn.log

@@ -3,11 +3,11 @@ version: '3.7'
 volumes:
   openvpn_config:
   db_data:
-#networks:
-#   frontend:
-#    external: true
-#   backend:
-#    external: true
+networks:
+  frontend:
+   external: true
+  backend:
+   external: true
 
 services:
   openvpn:
@@ -37,7 +37,7 @@ services:
       - EASYRSA_REQ_CN
       - EASYRSA_BATCH
     volumes:
-       - openvpn_config:/etc/openvpn
+      - openvpn_config:/etc/openvpn
     restart: always
     command: tail -f /dev/null
 
@@ -50,8 +50,12 @@ services:
       MYSQL_DATABASE: ${OPENVPN_ADMIN_DATABASE}
       MYSQL_USER: ${OPENVPN_ADMIN_USER}
       MYSQL_PASSWORD: ${OPENVPN_ADMIN_PASSWORD}
+    #ports eklend i
+    ports:
+    - 3306:3306
     volumes:
       - db_data:/var/lib/mysql
+
   googleauth:
     container_name: googleauth
     build:
@@ -76,5 +80,4 @@ services:
       - OPENVPN_APP_NAME
       - HOST_ADDR
       - HOST_SSL_PORT
-
     command: [start.sh]
