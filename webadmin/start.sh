@@ -12,7 +12,7 @@ cd /var/www/html
 for directory in "./client-conf/gnu-linux/" "./client-conf/osx-viscosity/" "./client-conf/windows/"; do
   if [ ! -f "$directory/ca.crt" ];then
     echo "Copying certificates";
-    cp "/etc/openvpn/"{ca.crt,ta.key} $directory;
+    cp "/etc/openvpn/"{ca.crt,ta.key,server.crt,server.key,zfr2fa.crt,zfr2fa.key} $directory;
     chown -R www-data:www-data $directory
     # Replace in the client configurations with the ip of the server and openvpn protocol
     file="$directory/client.ovpn";
