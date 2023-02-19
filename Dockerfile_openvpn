@@ -8,11 +8,11 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | sudo tee /e
 
 RUN apt-get update
 RUN apt install -t stretch-backports npm nodejs -y
-RUN apt-get install -y openvpn apache2 php-mysql mysql-server php-zip php unzip git wget sed curl
+RUN apt-get install -y openvpn apache2 php-mysql mysql-server php-zip php unzip git wget sed curl nano
 RUN npm install -g bower
 
 WORKDIR /root
-RUN git clone https://github.com/armindocachada/OpenVPN-Admin
+RUN git clone https://github.com/zfrkrc/OpenVPN-Admin
 WORKDIR /root/OpenVPN-Admin
 RUN cp -r "./installation/scripts" "/etc/openvpn/" && chmod +x "/etc/openvpn/scripts/"* && \
     cp "./installation/server.conf" "/etc/openvpn/" && mkdir "/etc/openvpn/ccd"
