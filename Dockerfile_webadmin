@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y git unzip zip git nodejs wget libzip-de
 RUN docker-php-ext-install pdo pdo_mysql mysqli zip
 
 WORKDIR /root
-RUN git clone https://github.com/zfrkrc/OpenVPN-Admin
+RUN git clone -b zfrldap https://github.com/zfrkrc/OpenVPN-Admin
 
 RUN ["/bin/bash", "-c", "cp -r /root/OpenVPN-Admin/{index.php,authenticator_response.php,sql,bower.json,.bowerrc,js,include,css,installation/client-conf} /var/www/html/"]
 RUN ls -alh /var/www/html/
