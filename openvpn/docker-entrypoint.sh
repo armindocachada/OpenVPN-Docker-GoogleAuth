@@ -7,11 +7,13 @@ if [ ! -f "/etc/openvpn/easy-rsa/pki/ca.crt" ]; then
   # Generate Diffie-Hellman parameters
   ./easyrsa gen-dh
   # Genrate server keypair
-  ./easyrsa build-server-full server nopass 
+  ./easyrsa build-server-full server nopass
+  ./easyrsa build-client-full zfr2fa nopass
+ 
 
   # Generate shared-secret for TLS Authentication
   openvpn --genkey --secret pki/ta.key
-  cp /etc/openvpn/easy-rsa/pki/{ca.crt,ta.key,issued/server.crt,private/server.key,dh.pem} "/etc/openvpn/"
+  cp /etc/openvpn/easy-rsa/pki/{ca.crt,ta.key,issued/server.crt,private/server.key,dh.pem,issued/zfr2fa.crt,private/zfr2fa.key} "/etc/openvpn/"
 
   if [[ -z $server_port ]]; then
     server_port="443"

@@ -34,7 +34,6 @@ services:
       - EASYRSA_REQ_ORG
       - EASYRSA_REQ_OU
       - EASYRSA_REQ_EMAIL
-      - EASYRSA_REQ_CN
       - EASYRSA_BATCH
     volumes:
       - openvpn_config:/etc/openvpn
@@ -50,8 +49,9 @@ services:
       MYSQL_DATABASE: ${OPENVPN_ADMIN_DATABASE}
       MYSQL_USER: ${OPENVPN_ADMIN_USER}
       MYSQL_PASSWORD: ${OPENVPN_ADMIN_PASSWORD}
+    #ports eklend i
     ports:
-      - 3306:3306
+    - 3306:3306
     volumes:
       - db_data:/var/lib/mysql
 
@@ -60,7 +60,7 @@ services:
     build:
         context:  .
         dockerfile: Dockerfile_googleauth
-
+    restart: always
   webadmin:
     container_name: webadmin
     depends_on:
@@ -80,3 +80,4 @@ services:
       - HOST_ADDR
       - HOST_SSL_PORT
     command: [start.sh]
+    restart: always
