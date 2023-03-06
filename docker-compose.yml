@@ -50,7 +50,7 @@ services:
       MYSQL_DATABASE: ${OPENVPN_ADMIN_DATABASE}
       MYSQL_USER: ${OPENVPN_ADMIN_USER}
       MYSQL_PASSWORD: ${OPENVPN_ADMIN_PASSWORD}
-      ports:
+    ports:
       - 3306:3306
     volumes:
       - db_data:/var/lib/mysql
