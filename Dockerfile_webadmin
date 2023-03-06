@@ -1,9 +1,10 @@
 FROM php:7.4-apache
-RUN apt-get update && apt-get install -y git unzip zip git nodejs wget libzip-dev
+
+RUN apt-get update && apt-get install -y git unzip zip git nodejs wget libzip-dev npm sed nano
 RUN docker-php-ext-install pdo pdo_mysql mysqli zip
 
 WORKDIR /root
-RUN git clone https://github.com/armindocachada/OpenVPN-Admin
+RUN git clone  https://github.com/zfrkrc/OpenVPN-Admin.git
 
 RUN ["/bin/bash", "-c", "cp -r /root/OpenVPN-Admin/{index.php,authenticator_response.php,sql,bower.json,.bowerrc,js,include,css,installation/client-conf} /var/www/html/"]
 RUN ls -alh /var/www/html/
@@ -19,10 +20,12 @@ RUN sed -i "s/\$host\ =\ 'localhost'/\$host = 'db'/" "/var/www/html/include/conf
     sed -i "s/\$pass\ =\ ''/\$pass = getenv('OPENVPN_ADMIN_PASSWORD')/" "/var/www/html/include/config.php" && \
     sed -i "s/\$user\ =\ ''/\$user = getenv('OPENVPN_ADMIN_USER')/" "/var/www/html/include/config.php" && \
     sed -i "s/\$app_name\ =\ ''/\$app_name = getenv('OPENVPN_APP_NAME')/" "/var/www/html/include/config.php"
-RUN curl -L https://npmjs.org/install.sh | sh
+
+#RUN curl -L https://npmjs.org/install.sh | sh
 
 WORKDIR /var/www/html
 RUN npm install -g bower
 RUN bower --allow-root install
 RUN rm -fr /root/OpenVPN-Admin && chown -R www-data:www-data /var/www/html
 COPY ./webadmin/start.sh /usr/local/bin
+RUN sed -i -e 's/\r$//' /usr/local/bin/start.sh
